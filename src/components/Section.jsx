@@ -2,7 +2,6 @@ import React from 'react';
 import Statistics from './Statistic';
 import FeedbackOptions from './FeedbackOptions';
 import './Feedback.modyle.css';
-import { getValue } from '@testing-library/user-event/dist/utils';
 
 class Section extends React.Component {
   state = {
