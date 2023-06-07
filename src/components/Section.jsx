@@ -1,54 +1,33 @@
 import React from 'react';
-import Statistics from './Statistic';
+import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions';
 import './Feedback.modyle.css';
 
-class Section extends React.Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+const Section = ({ good, neutral, bad, onLeaveFeedback }) => {
+  const countTotalFeedback = () => good + neutral + bad;
+
+  const countPositiveFeedbackPercentage = () => {
+    const positive = Math.round((good * 100) / countTotalFeedback());
+    return Number.isNaN(positive) ? 0 : positive;
   };
 
-  countTotalFeedback({ good, neutral, bad }) {
-    return good + neutral + bad;
-  }
-  countPositiveFeedbackPercentage({ good, neutral, bad }) {
-    const positive = Math.round((good * 100) / (good + neutral + bad));
-    if (Number.isNaN(positive)) {
-      return 0;
-    }
-    return positive;
-  }
+  return (
+    <div>
+      <FeedbackOptions
+        key="optionsFeeb"
+        onLeaveFeedback={onLeaveFeedback}
+        options={['good', 'neutral', 'bad']}
+      />
+      <Statistics
+        key="statistics"
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        total={countTotalFeedback()}
+        positivePercentage={countPositiveFeedbackPercentage()}
+      />
+    </div>
+  );
+};
 
-  onLeaveFeedback = value => {
-    const nameStat = value.toLowerCase();
-    this.setState(prevState => {
-      console.log();
-
-      return {
-        [nameStat]: prevState[nameStat] + 1,
-      };
-    });
-  };
-  render() {
-    return (
-      <div>
-        <FeedbackOptions
-          key="optionsFeeb"
-          onLeaveFeedback={this.onLeaveFeedback}
-          options={['good', 'neutral', 'bad']}
-        />
-        <Statistics
-          key="statistics"
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.countTotalFeedback(this.state)}
-          positivePercentage={this.countPositiveFeedbackPercentage(this.state)}
-        />
-      </div>
-    );
-  }
-}
 export default Section;
