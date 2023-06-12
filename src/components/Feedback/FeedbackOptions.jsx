@@ -15,7 +15,7 @@ function FeedbackOptions({ options, onLeaveFeedback }) {
             <li className="feedback__btn--item" key={elm}>
               <button
                 className="feedback__btn--btn"
-                onClick={(evt) => onLeaveFeedback(evt.target.textContent)}
+                onClick={() => onLeaveFeedback(elm)}
               >
                 {ucFirst(elm)}
               </button>
