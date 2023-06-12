@@ -18,8 +18,21 @@ export class App extends Component {
     }));
   };
 
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    const positive = Math.round((good * 100) / this.countTotalFeedback());
+    return Number.isNaN(positive) ? 0 : positive;
+  };
+
   render() {
     const { good, neutral, bad } = this.state;
+    const totalFeedback = this.countTotalFeedback();
+    const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
 
     return (
       <div>
@@ -27,10 +40,13 @@ export class App extends Component {
           good={good}
           neutral={neutral}
           bad={bad}
+          totalFeedback={totalFeedback}
+          positiveFeedbackPercentage={positiveFeedbackPercentage}
           onLeaveFeedback={this.onLeaveFeedback}
         />
       </div>
     );
   }
 }
+
 

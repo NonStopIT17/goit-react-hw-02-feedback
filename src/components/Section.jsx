@@ -4,19 +4,15 @@ import FeedbackOptions from './Feedback/FeedbackOptions';
 import './Feedback/Feedback.modyle.css';
 
 class Section extends Component {
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.props;
-    return good + neutral + bad;
-  };
-
-  countPositiveFeedbackPercentage = () => {
-    const { good } = this.props;
-    const positive = Math.round((good * 100) / this.countTotalFeedback());
-    return Number.isNaN(positive) ? 0 : positive;
-  };
-
   render() {
-    const { good, neutral, bad, onLeaveFeedback } = this.props;
+    const {
+      good,
+      neutral,
+      bad,
+      totalFeedback,
+      positiveFeedbackPercentage,
+      onLeaveFeedback
+    } = this.props;
 
     return (
       <div>
@@ -30,8 +26,8 @@ class Section extends Component {
           good={good}
           neutral={neutral}
           bad={bad}
-          total={this.countTotalFeedback()}
-          positivePercentage={this.countPositiveFeedbackPercentage()}
+          total={totalFeedback}
+          positivePercentage={positiveFeedbackPercentage}
         />
       </div>
     );
