@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Statistics from './Statistics';
-import FeedbackOptions from './FeedbackOptions';
-import './Feedback.modyle.css';
+import FeedbackOptions from './Feedback/FeedbackOptions';
+import './Feedback/Feedback.modyle.css';
 
 class Section extends Component {
   countTotalFeedback = () => {
