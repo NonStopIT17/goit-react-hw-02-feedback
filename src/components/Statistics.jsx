@@ -11,38 +11,36 @@ export default class Statistics extends React.Component {
       positivePercentage
     } = this.props;
 
-    if (total > 0) {
-      return (
-        <div key="feedback__stats" className="feedback__stats">
-          <h2 className="feedback__stats--title">Statistics</h2>
-          <ul className="feedback__stats--list">
-            <li className="feedback__stats--item">
-              <p className="feedback__stats--stat">Good: {good}</p>
-            </li>
-            <li className="feedback__stats--item">
-              <p className="feedback__stats--stat">Neutral: {neutral}</p>
-            </li>
-            <li className="feedback__stats--item">
-              <p className="feedback__stats--stat">Bad: {bad}</p>
-            </li>
-            <li className="feedback__stats--item">
-              <p className="feedback__stats--stat">Total: {total}</p>
-            </li>
-            <li className="feedback__stats--item">
-              <p className="feedback__stats--stat">
-                Positive feedback: {positivePercentage}%
-              </p>
-            </li>
-          </ul>
-        </div>
-      );
-    } else {
-      return (
-        <div key="feedback__stats" className="feedback__stats">
+    return (
+      <div key="feedback__stats" className="feedback__stats">
+        {total > 0 ? (
+          <>
+            <h2 className="feedback__stats--title">Statistics</h2>
+            <ul className="feedback__stats--list">
+              <li className="feedback__stats--item">
+                <p className="feedback__stats--stat">Good: {good}</p>
+              </li>
+              <li className="feedback__stats--item">
+                <p className="feedback__stats--stat">Neutral: {neutral}</p>
+              </li>
+              <li className="feedback__stats--item">
+                <p className="feedback__stats--stat">Bad: {bad}</p>
+              </li>
+              <li className="feedback__stats--item">
+                <p className="feedback__stats--stat">Total: {total}</p>
+              </li>
+              <li className="feedback__stats--item">
+                <p className="feedback__stats--stat">
+                  Positive feedback: {positivePercentage}%
+                </p>
+              </li>
+            </ul>
+          </>
+        ) : (
           <p>no feedback given</p>
-        </div>
-      );
-    }
+        )}
+      </div>
+    );
   }
 }
 
@@ -53,4 +51,5 @@ Statistics.propTypes = {
   total: PropTypes.number,
   positivePercentage: PropTypes.number,
 };
+
 

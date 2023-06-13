@@ -21,7 +21,8 @@ export class App extends Component {
 
   countPositiveFeedbackPercentage = () => {
     const { good } = this.state;
-    const positive = Math.round((good * 100) / this.countTotalFeedback());
+    const totalFeedback = this.countTotalFeedback();
+    const positive = Math.round((good * 100) / totalFeedback);
     return Number.isNaN(positive) ? 0 : positive;
   };
 
@@ -32,17 +33,31 @@ export class App extends Component {
 
     return (
       <div>
-        <Section
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          totalFeedback={totalFeedback}
-          positiveFeedbackPercentage={positiveFeedbackPercentage}
-          onLeaveFeedback={this.onLeaveFeedback}
-        />
+        {totalFeedback > 0 ? (
+          <Section
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            totalFeedback={totalFeedback}
+            positiveFeedbackPercentage={positiveFeedbackPercentage}
+            onLeaveFeedback={this.onLeaveFeedback}
+          />
+        ) : (
+          <Section
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            totalFeedback={totalFeedback}
+            positiveFeedbackPercentage={positiveFeedbackPercentage}
+            onLeaveFeedback={this.onLeaveFeedback}
+          />
+        )}
       </div>
     );
   }
 }
+
+export default App;
+
 
 
